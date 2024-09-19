@@ -1,9 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Merriweather } from "next/font/google";
+import { Corinthia, Fraunces, Merriweather } from "next/font/google";
 import "./globals.css";
 
 const merri = Merriweather({
   weight: ["300","400","700"],
+  subsets: ["latin"]
+});
+
+export const corinthia = Corinthia({
+  weight: ["400"],
+  subsets: ["latin"]
+});
+
+export const fraunces = Fraunces({
+  weight: ["400"],
   subsets: ["latin"]
 });
 
@@ -18,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body className={merri.className}>{children}</body>
     </html>
   );
