@@ -1,5 +1,6 @@
 import Confirmation from "./_components/Confirmation";
 import Flower from "./_components/Flower";
+import Footer from "./_components/Footer";
 import Gift from "./_components/Gift";
 import Hero from "./_components/Hero";
 import Info from "./_components/Info";
@@ -11,6 +12,7 @@ export default function Home() {
       <Info />
       <Confirmation />
       <Gift />
+      <Footer />
     </main>
   );
 }
