@@ -8,16 +8,14 @@ interface FlowerProps {
 }
 const Flower = ({src, className}: FlowerProps) => {
   return (
-    <div className={twMerge("absolute w-[40vw]", className)}>
       <Image
         src={src}
-        className=""
+        className={twMerge("absolute z-[-1]", className)}
         alt='flor azul'
         width={0}
         height={0}
         sizes='100%'
       />
-    </div>
   )
 }
 
