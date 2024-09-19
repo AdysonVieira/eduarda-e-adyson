@@ -7,7 +7,7 @@ import TextScript from './TextScript'
 
 const Info = () => {
   return (
-    <section className='bg-blue-100 px-5 py-20 w-full flex flex-col gap-20 items-center justify-center relative'>
+    <section className='bg-blue-50 px-5 py-20 w-full flex flex-col gap-20 items-center justify-center relative'>
       <Flower
         src="/flor.png"
         className="lg:w-[40vw] lg:top-[-200px] lg:right-[-80px] w-[50vw] top-[-50px] right-[-20px] z-10 rotate-180"
@@ -24,7 +24,7 @@ const Info = () => {
         <p className={`${fraunces.className} text-[2rem]`}>2024</p>
       </div>
       
-      <div className='bg-blue-50 h-[30rem] p-5 max-w-[20rem] flex flex-col items-center justify-between rounded-tl-full rounded-tr-full rounded-bl-md rounded-br-md text-center'>
+      <div className='bg-white h-[30rem] p-5 max-w-[20rem] flex flex-col items-center justify-between rounded-tl-full rounded-tr-full rounded-bl-md rounded-br-md text-center'>
         <Image
           src="/igreja.svg"
           alt='igreja'
