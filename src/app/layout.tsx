@@ -17,7 +17,7 @@ export const fraunces = Fraunces({
   subsets: ["latin"]
 });
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Eduarda e Adyson",
   description: "Nosso casamento, Eduarda e Adyson",
 };
