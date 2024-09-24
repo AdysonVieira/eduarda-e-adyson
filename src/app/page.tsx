@@ -14,6 +14,7 @@ export default function Home() {
           height={200}
         />
         <Title>Eduarda & Adyson</Title>
+        <p>Site disponível em breve</p>
       </div>
     </main>
   );
