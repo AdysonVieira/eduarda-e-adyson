@@ -6,7 +6,7 @@ interface IErrorProps {
 
 const ErrorMessage = ({ children }: IErrorProps) => {
   return (
-    <span className='text-red-500 inline-block text-start text-xs'>
+    <span className='text-red-500 text-start text-xs'>
       {children}    
     </span>
   )
