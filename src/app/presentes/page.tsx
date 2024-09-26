@@ -32,7 +32,7 @@ const GiftPage = async () => {
         </div>
         <ul className='flex flex-wrap justify-center gap-8 max-w-[90vw]'>
           {
-            gifts.map((gift) => <GiftCard key={gift.name} name={gift.name} price={gift.price} imgUrl={gift.imgUrl} />)
+            gifts.map((gift) => <GiftCard key={gift.id} id={gift.id} name={gift.name} price={gift.price} imgUrl={gift.imgUrl} />)
           }
         </ul>
       </section>
