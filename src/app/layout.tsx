@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Corinthia, Fraunces, Merriweather } from "next/font/google";
 import "./globals.css";
+import CartProvider from "@/contexts/CartContext";
 
 const merri = Merriweather({
   weight: ["300","400","700"],
@@ -29,7 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={merri.className}>{children}</body>
+      <CartProvider>
+        <body className={merri.className}>{children}</body>
+      </CartProvider>
     </html>
   );
 }
