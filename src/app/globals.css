@@ -22,6 +22,27 @@
 
 body {
   color: rgb(var(--primary));
+
+
+
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0)
+  }
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: 5px solid #93C5FD;
+  border-bottom-color: transparent;
+  animation: spinner 1s infinite forwards
 }
 
 @layer utilities {
