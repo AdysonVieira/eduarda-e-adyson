@@ -1,6 +1,6 @@
 import { Gift } from '@/app/@types/gift'
 import { GuestInputs } from '@/app/confirmacao/schema/confirmationSchema'
-import { GuestDataInputs } from '@/app/presentear/pagamento/schema/GuestDataSchema'
+import { GuestDataInputs } from '@/app/carrinho/pagamento/schema/GuestDataSchema'
 import axios from 'axios'
 
 export const api = axios.create({
