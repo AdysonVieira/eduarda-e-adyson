@@ -1,29 +1,48 @@
+"use client"
+
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { confirmationSchema, GuestInputs } from '../schema/confirmationSchema'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { setGuestConfirmation } from '@/services/api'
 import ErrorMessage from '@/app/_components/ErrorMessage'
-import { Button } from '@/components/ui/button'
-import { CheckCircle, X } from 'lucide-react'
+import Button from '@/app/_components/Button'
+import { useCart } from '@/contexts/CartContext'
+import Loading from '@/app/_components/Loading'
 import Success from './Success'
-import Error from './Error'
 
 const GuestForm = () => {
-  const [success, setSuccess] = React.useState<boolean>(false)
-  const [failure, setFailure] = React.useState<boolean>(false)
+
+  const [ loading, setLoading ] = React.useState<boolean>(false)
+  const [ success, setSucess ] = React.useState<boolean>(false)
+  const { setGuestConfirmation } = useCart()
   const { register, handleSubmit, formState: {errors} } = useForm<GuestInputs>({
     resolver: yupResolver(confirmationSchema),
   })
 
   const onSubmit: SubmitHandler<GuestInputs> = async (data) => {
-    const res = await setGuestConfirmation(data)
-    if (res === 200) return setSuccess(true)
-    if (res !== 200) return setFailure(true)
+    setGuestConfirmation(data)
+    try {
+      setLoading(true)
+      const res = await fetch('/api/guest', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (!res.ok) {
+        throw new Error('Erro ao confirmar presença')
+      }
+      setLoading(false)
+      setSucess(true)
+    } catch(error) {
+      console.error(error)
+    } 
   }
 
+  if (loading) return <Loading message='Estamos confirmando sua presença' />
   if (success) return <Success />
-  if (failure) return <Error onClick={setFailure}/>
 
   return ( 
     <form
@@ -31,7 +50,7 @@ const GuestForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className='text-start'>
-        <label htmlFor='name' className='block text-start'>Nome</label>
+        <label htmlFor='name' className='block text-start mb-2'>Nome</label>
         <input
           className='border-1 ring-1 border-blue-950 w-full rounded-sm px-2 py-1 text-[1rem]'
           {...register("name")}
@@ -55,7 +74,7 @@ const GuestForm = () => {
           />
         </div>
       </div>
-      <Button className='bg-blue-500 text-blue-100 w-full uppercase' variant="default">confirmar presença</Button>
+      <Button>confirmar presença</Button>
     </form>
   )
 }

@@ -1,24 +1,11 @@
-"use client"
-
+'use client'
 import React from 'react'
 import TextScript from '../_components/TextScript'
 import Image from 'next/image'
 import Flower from '../_components/Flower'
 import GuestForm from './components/GuestForm'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { confirmationSchema, GuestInputs } from './schema/confirmationSchema'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { setGuestConfirmation } from '@/services/api'
 
 const ConfirmationPage = () => {
-  const { register, handleSubmit, formState: {errors} } = useForm<GuestInputs>({
-    resolver: yupResolver(confirmationSchema),
-  })
-
-  const onSubmit: SubmitHandler<GuestInputs> = async (data) => {
-    await setGuestConfirmation(data)
-  }
-   
   return (
     <section className='bg-blue-50 px-5 py-20 w-full flex flex-col gap-10 items-center justify-center relative min-h-screen'>
 
@@ -26,7 +13,7 @@ const ConfirmationPage = () => {
         src="/flor.png"
         className="absolute lg:w-[40vw] lg:top-[-20px] lg:left-[-80px] w-[50vw] top-[0] left-[-20px]"
       />
-      <div className="w-[400px] text-center flex flex-col gap-5 items-center px-5">
+      <div className="w-full md:w-[400px] text-center flex flex-col gap-5 items-center px-5">
         <Image
           src="/brasao.png"
           alt='igreja'

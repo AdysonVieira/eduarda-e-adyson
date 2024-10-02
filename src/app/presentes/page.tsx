@@ -3,10 +3,10 @@ import TextScript from '../_components/TextScript'
 import Image from 'next/image'
 import Flower from '../_components/Flower'
 import GiftCard from './components/GiftCard'
-import { getGifts } from '@/services/api'
+import { db } from '@/lib/prisma'
 
 const GiftPage = async () => {
-  const gifts = await getGifts()
+  const gifts = await db.gift.findMany({})
 
   if (gifts) {
     return (
@@ -30,9 +30,9 @@ const GiftPage = async () => {
           </div>
           <p>Queridos familiares e amigos, para nós, a presença de vocês neste dia tão especial é o maior presente que poderíamos receber. Mas, se vocês também quiserem nos presentear, ficaremos muito agradecidos.</p>
         </div>
-        <ul className='flex flex-wrap justify-center gap-8 max-w-[90vw]'>
+        <ul className='flex flex-wrap justify-center gap-5 max-w-[90vw]'>
           {
-            gifts.map((gift) => <GiftCard key={gift.id} id={gift.id} name={gift.name} price={gift.price} imgUrl={gift.imgUrl} />)
+            gifts.map((gift) => <GiftCard key={gift.id} id={gift.id} name={gift.name} price={Number(gift.price)} imgUrl={gift.imgUrl} />)
           }
         </ul>
       </section>
