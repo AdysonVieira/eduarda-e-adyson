@@ -1,6 +1,6 @@
 import React from 'react'
 import TextScript from './TextScript'
-import { Button } from '@/components/ui/button'
+import Button from '@/app/_components/Button'
 import Link from 'next/link'
 
 const Gift = () => {
@@ -13,7 +13,7 @@ const Gift = () => {
         </div>
         <p>Fique à vontade para nos presentear, confira nossa lista de sugestões</p>
         <Link href={"/presentes"}>
-          <Button className='bg-blue-500 text-blue-100 w-full uppercase' variant="default">Lista de presentes</Button>
+          <Button>Lista de presentes</Button>
         </Link>
       </div>
     </section>

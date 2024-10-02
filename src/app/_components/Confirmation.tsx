@@ -1,6 +1,6 @@
 import React from 'react'
 import TextScript from './TextScript'
-import { Button } from '@/components/ui/button'
+import Button from '@/app/_components/Button'
 import Link from 'next/link'
 
 const Confirmation = () => {
@@ -13,7 +13,7 @@ const Confirmation = () => {
         </div>
         <p>Aguardamos sua confirmação até o dia 14 de novembro</p>
         <Link href={"/confirmacao"}>
-          <Button className='bg-blue-500 text-blue-100 w-full uppercase' variant="default">Confirme aqui</Button>
+          <Button>Confirme aqui</Button>
         </Link>
       </div>
     </section>
