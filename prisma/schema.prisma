@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Wedding {
+  id          String @id @default(uuid())
+  bride       String
+  brideMother String
+  brideFather String
+  groom       String
+  groomMother String
+  groomFather String
+  day         Int
+  month       String
+  year        Int
+  address     String
+  city        String
+  mapsUrl     String
+  reception   String
+}
+
+model Guest {
+  id      String @id @default(uuid())
+  name    String
+  escorts Int
+}
+
+model Gift {
+  id           String         @id @default(uuid())
+  name         String
+  price        Decimal        @db.Decimal(10, 2)
+  imgUrl       String
+  GiftReceived GiftReceived[]
+}
+
+enum GiftReceivedStatus {
+  PAID
+  CANCELED
+  PENDING
+}
+
+model GiftReceived {
+  id               String             @id @default(uuid())
+  status           GiftReceivedStatus @default(PENDING)
+  transactionId    String?            @db.VarChar(255)
+  total            Decimal            @db.Decimal(10, 2)
+  guestName        String
+  message          String?            @db.VarChar(255)
+  giftId           String
+  gift             Gift               @relation(fields: [giftId], references: [id])
+  createdAt        DateTime           @default(now())
+  updateAt         DateTime           @updatedAt
+}
