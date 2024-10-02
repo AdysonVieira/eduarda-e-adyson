@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { formartCurrency } from '@/helpers/formatCurrency';
+import { formatCurrency } from '@/helpers/formatCurrency';
 import Button from '@/app/_components/Button';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/contexts/CartContext';
@@ -21,7 +21,7 @@ const GiftCard = ({name, price, imgUrl, id}: IGiftCardProps) => {
 
   const handleClick = () => {
     setGift({id, name, price, imgUrl})
-    router.push("/presentear")
+    router.push("/carrinho")
   }
 
   return (
@@ -34,7 +34,7 @@ const GiftCard = ({name, price, imgUrl, id}: IGiftCardProps) => {
         height={150}
         />
       <p>{name}</p>
-      <p className='text-start'>{formartCurrency(Number(price))}</p>
+      <p className='text-start'>{formatCurrency(Number(price))}</p>
       <Button className='w-full' onClick={handleClick}>presentear</Button>
     </li>
   )
