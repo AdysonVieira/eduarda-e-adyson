@@ -1,7 +1,7 @@
 'use client'
 
 import { Gift } from "@/app/@types/gift";
-import { GuestDataInputs } from "@/app/presentear/pagamento/schema/GuestDataSchema";
+import { GuestDataInputs } from "@/app/carrinho/pagamento/schema/GuestDataSchema";
 import React, { ReactNode, SetStateAction } from "react";
 
 type GuestConfirmation = {
