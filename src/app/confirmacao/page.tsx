@@ -3,11 +3,11 @@ import React from 'react'
 import TextScript from '../_components/TextScript'
 import Image from 'next/image'
 import Flower from '../_components/Flower'
-import GuestForm from './components/GuestForm'
+import GuestForm from './_components/GuestForm'
 
 const ConfirmationPage = () => {
   return (
-    <section className='bg-blue-50 px-5 py-20 w-full flex flex-col gap-10 items-center justify-center relative min-h-screen'>
+    <section className='px-5 py-20 w-full flex flex-col gap-10 items-center justify-center relative min-h-screen'>
 
       <Flower
         src="/flor.png"

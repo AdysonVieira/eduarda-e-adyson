@@ -2,20 +2,22 @@
 
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { confirmationSchema, GuestInputs } from '../schema/confirmationSchema'
+import { confirmationSchema, GuestInputs } from '../_schema/confirmationSchema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ErrorMessage from '@/app/_components/ErrorMessage'
 import Button from '@/app/_components/Button'
 import { useCart } from '@/contexts/CartContext'
 import Loading from '@/app/_components/Loading'
 import Success from './Success'
+import { api } from '@/services/api'
+
 
 const GuestForm = () => {
 
-  const [ loading, setLoading ] = React.useState<boolean>(false)
-  const [ success, setSucess ] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState<boolean>(false)
+  const [success, setSucess] = React.useState<boolean>(false)
   const { setGuestConfirmation } = useCart()
-  const { register, handleSubmit, formState: {errors} } = useForm<GuestInputs>({
+  const { register, handleSubmit, formState: { errors } } = useForm<GuestInputs>({
     resolver: yupResolver(confirmationSchema),
   })
 
@@ -23,28 +25,22 @@ const GuestForm = () => {
     setGuestConfirmation(data)
     try {
       setLoading(true)
-      const res = await fetch('/api/guest', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-
-      if (!res.ok) {
-        throw new Error('Erro ao confirmar presença')
+      const res = await api.post('/api/guest', data)
+      if (res.status === 201) {
+        setLoading(false)
+        setSucess(true)
       }
-      setLoading(false)
-      setSucess(true)
-    } catch(error) {
+    } catch (error) {
       console.error(error)
-    } 
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (loading) return <Loading message='Estamos confirmando sua presença' />
   if (success) return <Success />
 
-  return ( 
+  return (
     <form
       className='flex flex-col gap-6 w-full'
       onSubmit={handleSubmit(onSubmit)}
@@ -52,12 +48,11 @@ const GuestForm = () => {
       <div className='text-start'>
         <label htmlFor='name' className='block text-start mb-2'>Nome</label>
         <input
-          className='border-1 ring-1 border-blue-950 w-full rounded-sm px-2 py-1 text-[1rem]'
+          className='border border-blue-100 w-full rounded-sm p-2 px-4 text-[1rem]'
           {...register("name")}
-          autoFocus
           placeholder='Digite seu nome completo'
         />
-        { errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage> }
+        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
       </div>
 
       <div>
@@ -65,8 +60,8 @@ const GuestForm = () => {
         <div className='flex items-center gap-7'>
           <label htmlFor='name' className='block text-start'>Adultos</label>
           <input
-            type='number' 
-            className='border-1 ring-1 border-blue-950 rounded-sm px-2 py-1 text-[1rem] w-20'
+            type='number'
+            className='border border-blue-100 rounded-sm p-2 px-4 text-[1rem] w-15'
             defaultValue={0}
             min={0}
             max={10}

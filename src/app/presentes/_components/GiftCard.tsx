@@ -25,7 +25,7 @@ const GiftCard = ({name, price, imgUrl, id}: IGiftCardProps) => {
   }
 
   return (
-    <li className='flex flex-col justify-between items-center gap-4 max-w-48 min-w-36 rounded-xl p-5 bg-blue-100'>
+    <li className='flex flex-col justify-between items-center gap-4 max-w-48 min-w-36 rounded-xl p-5 bg-blue-50 border border-blue-100'>
       <Image
         className='object-cover mb-5 aspect-square rounded-md'
         src={imgUrl}

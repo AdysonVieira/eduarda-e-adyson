@@ -1,24 +1,35 @@
-import { Gift } from '@/app/@types/gift'
-import { GuestInputs } from '@/app/confirmacao/schema/confirmationSchema'
-import { GuestDataInputs } from '@/app/carrinho/pagamento/schema/GuestDataSchema'
 import axios from 'axios'
+import { GiftData, GuestData, PaymentType } from '@/app/@types/checkout'
+import { PaymentGuestDataInputs } from '@/app/carrinho/pagamento/_schema/PaymentGuestDataSchema'
+import { PaymentCardDataInputs } from '@/app/carrinho/pagamento/_schema/PaymentCardDataSchema'
+import { PixQrCodeResponse } from './CheckoutPixService'
+import { GuestDataInputs } from '@/app/carrinho/_schema/GuestDataSchema'
+import { CreditCardResponse } from './CheckoutCreditCardService'
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL
 })
 
-export const setGuestConfirmation = async (data: GuestInputs) => {
-  const res = await api.post('/api/guest', data)
-  return res.status
-}
+export const setCreditCardCheckout = async (gift: GiftData, guest: GuestData, paymentGuestData: PaymentGuestDataInputs, paymentCardtData: PaymentCardDataInputs, ): Promise<CreditCardResponse> => {
 
-export const setGuestData = async (data: GuestDataInputs): Promise<number> => {
-  const res = await api.post("/api/checkout", data)
-  return res.status
-}
-
-export const getGifts = async (): Promise<Gift[]> => {
-  const res = await api.get("/api/gifts")
+  const res = await api.post("/api/checkout", {
+    gift,
+    guest,
+    paymentGuestData,
+    paymentCardtData,
+  })
   return res.data
 }
+
+export const setPixCheckout = async (gift: GiftData, guest: GuestDataInputs ):Promise<PixQrCodeResponse> => {
+  const res = await api.post("/api/pix", {gift, guest})
+  return res.data
+}
+
+export const apiAsaas = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_ASAAS_API_URL,
+  headers: {
+    access_token: process.env.ASAAS_API_ACCESS_TOKEN,
+  }
+})
 

@@ -4,7 +4,7 @@ import Flower from './Flower'
 
 const Footer = () => {
   return (
-    <footer className='bg-blue-100 px-5 py-20 w-full flex flex-col gap-20 items-center justify-center relative overflow-hidden' >
+    <footer className='bg-blue-50 px-5 py-20 w-full flex flex-col gap-20 items-center justify-center relative overflow-hidden' >
       <Flower
         src="/flor.png"
         className="md:w-[40vw] md:top-[-10px] md:right-[-150px] w-[50vw] top-[50px] right-[-80px] z-0 rotate-90"

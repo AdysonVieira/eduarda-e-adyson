@@ -2,7 +2,7 @@
 import React from 'react'
 import ErrorMessage from '@/app/_components/ErrorMessage'
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
-import { GuestDataInputs, GuestDataSchema } from '../schema/GuestDataSchema'
+import { GuestDataInputs, GuestDataSchema } from '../_schema/GuestDataSchema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Button from '@/app/_components/Button'
 import { IMaskInput } from 'react-imask'
@@ -22,65 +22,67 @@ const GuestDataForm = () => {
   }
 
   return (
-    <div className="w-full md:w-[400px] text-center flex flex-col gap-5 items-center px-5">
-      <h1>Informações Pessoais</h1>
+    <div className="w-full text-center flex flex-col items-center gap-5">
+      <div className='bg-blue-50 p-5 w-full border border-blue-100 rounded-lg'>
+        <h1 className='uppercase'>Preencha seus dados e deixe uma mensagem</h1>
+      </div>
       <form
         className='w-full flex flex-col gap-5'
         onSubmit={handleSubmit(onSubmit)}
-        >
+      >
         <div className='text-start'>
-          <label htmlFor='name' className='block text-start'>Nome</label>
-            <input
-              {...register("name")}
-              className='border-1 ring-1 border-blue-950 w-full rounded-sm px-2 py-1 text-[1rem]'
-              placeholder='Digite seu nome completo'
-            />
+          <label htmlFor='name' className='block text-start mb-1'>Nome</label>
+          <input
+            {...register("name")}
+            className='border border-blue-100 w-full rounded-sm p-2 px-4 text-[1rem]'
+            placeholder='Nome completo'
+          />
           {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
         </div>
 
-        <div className='text-start'>
-          <label htmlFor='cpfCnpj' className='block text-start'>CPF</label>
+        <div className='text-start w-full'>
+          <label htmlFor='cpfCnpj' className='block text-start mb-1'>CPF</label>
           <Controller
             name='cpfCnpj'
             control={control}
-            render={({field}) => (
+            render={({ field }) => (
               <IMaskInput
                 {...field}
                 id='cpfCnpj'
                 type='text'
-                className='border-1 ring-1 border-blue-950 w-full rounded-sm px-2 py-1 text-[1rem]'
-                placeholder='Apenas números'
+                className='border border-blue-100 w-full rounded-sm p-2 px-4 text-[1rem]'
+                placeholder='000.000.000-00'
                 mask={"000.000.000-00"}
-                />
+              />
             )}
           />
           {errors.cpfCnpj && <ErrorMessage>{errors.cpfCnpj.message}</ErrorMessage>}
         </div>
 
         <div className='text-start'>
-          <label htmlFor='mobilePhone' className='block text-start'>Celular</label>
-            <Controller
-              name='mobilePhone'
-              control={control}
-              render={({ field }) => (
-                <IMaskInput
-                  {...field}
-                  id='mobilePhone'
-                  type='tel'
-                  className='border-1 ring-1 border-blue-950 w-full rounded-sm px-2 py-1 text-[1rem]'
-                  placeholder='Apenas números'
-                  mask={"(00) 00000-0000"}
-                />
-              )}
-            />
+          <label htmlFor='mobilePhone' className='block text-start mb-1'>Celular</label>
+          <Controller
+            name='mobilePhone'
+            control={control}
+            render={({ field }) => (
+              <IMaskInput
+                {...field}
+                id='mobilePhone'
+                type='tel'
+                className='border border-blue-100 w-full rounded-sm p-2 px-4 text-[1rem]'
+                placeholder='Apenas números'
+                mask={"(00) 00000-0000"}
+              />
+            )}
+          />
           {errors.mobilePhone && <ErrorMessage>{errors.mobilePhone.message}</ErrorMessage>}
         </div>
         <div className='text-start'>
-          <label htmlFor='message' className='block text-start'>Messagem</label>
+          <label htmlFor='message' className='block text-start mb-1'>Mensagem</label>
           <textarea
             {...register('message')}
-            className='border-1 ring-1 border-blue-950 w-full rounded-sm px-2 py-1 text-[1rem]'
-            placeholder='Se preferir, deixenos uma mensagem'
+            className='border border-blue-100 w-full rounded-sm p-2 px-4 text-[1rem]'
+            placeholder='Se preferir, deixe-nos uma mensagem'
             rows={5} />
           {errors.message && <ErrorMessage>{errors.message.message}</ErrorMessage>}
         </div>
