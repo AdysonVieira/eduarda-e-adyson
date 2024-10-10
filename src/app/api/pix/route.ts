@@ -1,9 +1,10 @@
 import { GiftData } from "@/app/@types/checkout";
+import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
 import CheckoutPixService from "@/services/CheckoutPixService";
 import { QrCode } from "lucide-react";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(res: NextResponse) {
+export async function POST(req: NextRequest, res: NextResponse<{gift: GiftData, guest: GuestDataInputs}>) {
   const { gift, guest} = await res.json();
   
   const checkoutService = new CheckoutPixService()

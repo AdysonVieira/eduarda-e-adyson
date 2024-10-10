@@ -1,10 +1,13 @@
+import { GiftData } from "@/app/@types/checkout";
+import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
+import { PaymentCardDataInputs } from "@/app/carrinho/pagamento/_schema/PaymentCardDataSchema";
+import { PaymentGuestDataInputs } from "@/app/carrinho/pagamento/_schema/PaymentGuestDataSchema";
 import CheckoutCreditCardService from "@/services/CheckoutCreditCardService";
-import { headers } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(res: NextResponse) {
-  const { gift, guest, paymentGuestData, paymentCardtData } = await res.json();
-  const payment = {...paymentGuestData, ...paymentCardtData}
+export async function POST(req: NextRequest, res: NextResponse<{gift: GiftData, guest: GuestDataInputs, paymentGuestData: PaymentGuestDataInputs, paymentCardData: PaymentCardDataInputs}>) {
+  const { gift, guest, paymentGuestData, paymentCardData } = await res.json();
+  const payment = {...paymentGuestData, ...paymentCardData}
   
  
   const checkoutService = new CheckoutCreditCardService()
