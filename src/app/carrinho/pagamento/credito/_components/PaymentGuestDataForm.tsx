@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { IMaskInput } from 'react-imask'
 import { useCart } from '@/hooks/useCart'
-import { PaymentGuestDataInputs, PaymentGuestDataSchema } from '../_schema/PaymentGuestDataSchema'
+import { PaymentGuestDataInputs, PaymentGuestDataSchema } from '../../_schema/PaymentGuestDataSchema'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Button from '@/app/_components/Button'

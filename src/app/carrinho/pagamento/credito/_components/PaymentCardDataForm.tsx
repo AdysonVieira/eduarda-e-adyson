@@ -7,7 +7,7 @@ import { useCart } from '@/contexts/CartContext'
 import { IMask, IMaskInput } from 'react-imask'
 import ErrorMessage from '@/app/_components/ErrorMessage'
 import Button from '@/app/_components/Button'
-import { PaymentCardDataInputs, PaymentCardDataSchema } from '../_schema/PaymentCardDataSchema'
+import { PaymentCardDataInputs, PaymentCardDataSchema } from '../../_schema/PaymentCardDataSchema'
 import { setCreditCardCheckout } from '@/services/api'
 import { useRouter } from 'next/navigation'
 import Loading from '@/app/_components/Loading'
@@ -37,9 +37,9 @@ const PaymentCardDataForm = () => {
         }
         setLoading(false);
         return order
-    };
-        
-    } catch(err) {
+      };
+
+    } catch (err) {
       setError('Erro ao processar pagamento')
       setLoading(false)
       console.error('Erro ao processar pagamento: ', err)
@@ -50,6 +50,7 @@ const PaymentCardDataForm = () => {
   };
 
   if (loading) return <Loading message='Carregando pagamento, aguarde!' />
+  if (error) return <p>{error}</p>
 
   return (
     <div className='w-full flex flex-col gap-5 md:w-[600px] text-center px-5'>
@@ -170,7 +171,7 @@ const PaymentCardDataForm = () => {
           </div>
         </div>
         <div>
-        <label htmlFor='installmentCount' className='block text-start mb-1'>Parcelas</label>
+          <label htmlFor='installmentCount' className='block text-start mb-1'>Parcelas</label>
           <select id='installmentCount' className='border border-blue-100 w-full rounded-sm p-2 px-4 text-[1rem]' {...register('installmentCount')}>
             <option value={1} defaultChecked>{`1x de ${formatCurrency(gift!.price)}`}</option>
             <option value={2}>{`2x de ${formatCurrency(gift!.price / 2)}`}</option>
