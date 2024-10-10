@@ -49,8 +49,9 @@ const PixPaymentPage = () => {
             <GiftCardDetails />
             <ul className='flex flex-col gap-3 text-start text-[0.75rem]'>
               <li>1. Para pagamento via Pix, gere a chave Pix clicando no botão abaixo.</li>
-              <li>2. A chave pix expirará em 2 horas, após esse período será necessário gerar outra chave.</li>
+              <li>2. A chave PIX expirará em 2 horas, após esse período será necessário gerar outra chave.</li>
               <li>3. Você receberá a confirmação do pagamento via Whatsapp pelo número cadastrado.</li>
+              <li className='bg-yellow-50'>4. Em caso de problema com a geração da chave PIX, faça o pagamento através do QR Code impresso no convite.</li>
             </ul>
             <Button onClick={handleClick}>Gerar chave pix</Button>
           </>
