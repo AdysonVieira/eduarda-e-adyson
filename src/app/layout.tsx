@@ -1,6 +1,5 @@
-'use client'
 import type { Metadata } from "next";
-import { Corinthia, Fraunces, Merriweather } from "next/font/google";
+import { Merriweather } from "next/font/google";
 import "./globals.css";
 import CartProvider from "@/contexts/CartContext";
 import Header from "./_components/Header";
@@ -15,11 +14,7 @@ const metadata: Metadata = {
   description: "Nosso casamento, Eduarda e Adyson",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode;}>) {
   return (
     <html lang="pt-BR">
       <body className={merri.className}>
