@@ -2,6 +2,7 @@ import { $Enums, Gift, GiftReceived, GiftReceivedStatus } from "@prisma/client";
 import { GiftData, GuestData, PaymentData } from '@/app/@types/checkout'
 import { db } from "../lib/prisma";
 import PaymentService from "./PaymentCreditCardService";
+import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
 
 export interface CreditCardResponse {
   id: string;
@@ -11,7 +12,7 @@ export interface CreditCardResponse {
 }
 
 class CheckoutCreditCardService {
-  async process(gift: GiftData, guest: GuestData, payment: PaymentData ): Promise<CreditCardResponse> {
+  async process(gift: GiftData, guest: GuestDataInputs, payment: PaymentData ): Promise<CreditCardResponse> {
   
     const giftInCart = await db.gift.findUnique({
       where: {
@@ -23,7 +24,7 @@ class CheckoutCreditCardService {
 
     const paymentService = new PaymentService();
     
-    const { transactionId, gatewayStatus } = await paymentService.process(orderCreated, guest, payment);
+    const { transactionId, gatewayStatus } = await paymentService.process(orderCreated, payment);
 
     orderCreated = await db.giftReceived.update({
       where: {
@@ -43,7 +44,7 @@ class CheckoutCreditCardService {
     }
   }
 
-  private async _createOrder( gift: Gift, guest: GuestData): Promise<GiftReceived> {
+  private async _createOrder( gift: Gift, guest: GuestDataInputs): Promise<GiftReceived> {
     const orderCreated = await db.giftReceived.create({
       data: {
         guestName: guest.name,

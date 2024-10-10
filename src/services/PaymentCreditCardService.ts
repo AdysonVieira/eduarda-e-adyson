@@ -1,11 +1,10 @@
 import { GiftReceived, GiftReceivedStatus } from "@prisma/client";
 import { apiAsaas } from "./api";
-import { GuestData, PaymentData, PaymentType } from "@/app/@types/checkout";
+import { GuestData, PaymentData } from "@/app/@types/checkout";
 
 class PaymentCreditCardService {
   async process(
     giftReceived: GiftReceived,
-    guest: GuestData,
     payment: PaymentData,
   ): Promise<
   { transactionId: string, status: GiftReceivedStatus, gatewayStatus: string} >{
