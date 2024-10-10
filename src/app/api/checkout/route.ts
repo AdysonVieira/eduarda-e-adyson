@@ -5,10 +5,10 @@ import { PaymentGuestDataInputs } from "@/app/carrinho/pagamento/_schema/Payment
 import CheckoutCreditCardService from "@/services/CheckoutCreditCardService";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(res: NextResponse<{gift: GiftData, guest: GuestDataInputs, paymentGuestData: PaymentGuestDataInputs, paymentCardData: PaymentCardDataInputs}>) {
-  const { gift, guest, paymentGuestData, paymentCardData } = await res.json();
+export async function POST(req: NextRequest) {
+  const { gift, guest, paymentGuestData, paymentCardData }: {gift: GiftData, guest: GuestDataInputs, paymentGuestData: PaymentGuestDataInputs, paymentCardData: PaymentCardDataInputs} = await req.json();
   const payment = {...paymentGuestData, ...paymentCardData}
-  
+  console.log(gift, guest, paymentGuestData, paymentCardData)
  
   const checkoutService = new CheckoutCreditCardService()
   const orderCreated = await checkoutService.process(gift, guest, payment)

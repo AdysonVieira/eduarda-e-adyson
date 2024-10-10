@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/prisma";
 
-export async function POST(res: NextResponse<{name: string, escorts: number}>) {
-  const { name, escorts } = await res.json();
+export async function POST(req: NextRequest) {
+  const { name, escorts }: {name: string, escorts: number} = await req.json();
 
   try {
     const guest = await db.guest.create({
