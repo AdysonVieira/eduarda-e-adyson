@@ -1,21 +1,17 @@
-import Image from "next/image";
-import Flower from "./_components/Flower";
-import Title from "./_components/Title";
+import Confirmation from "./_components/Confirmation";
+import Footer from "./_components/Footer";
+import Gift from "./_components/Gift";
+import Hero from "./_components/Hero";
+import Info from "./_components/Info";
 
 export default function Home() {
   return (
-    <main className="flex relative min-h-screen flex-col items-center justify-center">
-      <Flower src="/flor.png" className="top-[-20px] left-[-80px]"/>
-      <div className="flex flex-col justify-center items-center gap-5">
-        <Image 
-          src="/brasao.svg"
-          alt="Brasão do casamento"
-          width={200}
-          height={200}
-        />
-        <Title>Eduarda & Adyson</Title>
-        <p>Site disponível em breve</p>
-      </div>
+    <main className="flex gap-10 min-h-screen flex-col items-center justify-center overflow-x-hidden">
+      <Hero />
+      <Info />
+      <Confirmation />
+      <Gift />
+      <Footer />
     </main>
   );
 }
