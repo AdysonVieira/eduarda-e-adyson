@@ -9,7 +9,7 @@ const merri = Merriweather({
   subsets: ["latin"]
 });
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: "Eduarda e Adyson",
   description: "Nosso casamento, Eduarda e Adyson",
 };
