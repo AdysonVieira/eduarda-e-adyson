@@ -35,13 +35,16 @@ const PaymentCardDataForm = () => {
           setOrder(order);
           router.push(`/success?transactionId=${order.transactionId}`)
         }
+        if (order.gatewayStatus === '401' || order.gatewayStatus === '400') {
+          setError('Erro ao processar pagamento')
+          return
+        }
         setLoading(false);
         return order
       };
 
     } catch (err) {
-      setError('Erro ao processar pagamento')
-      setLoading(false)
+      setError('Erro ao processar pagamento, tente novamente mais tarde!')
       console.error('Erro ao processar pagamento: ', err)
 
     } finally {
