@@ -10,16 +10,6 @@ const merri = Merriweather({
   subsets: ["latin"]
 });
 
-export const corinthia = Corinthia({
-  weight: ["400"],
-  subsets: ["latin"]
-});
-
-export const fraunces = Fraunces({
-  weight: ["400"],
-  subsets: ["latin"]
-});
-
 const metadata: Metadata = {
   title: "Eduarda e Adyson",
   description: "Nosso casamento, Eduarda e Adyson",

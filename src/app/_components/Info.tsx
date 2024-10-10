@@ -2,9 +2,10 @@
 import Image from 'next/image'
 import React from 'react'
 import Flower from './Flower'
-import { fraunces } from '../layout'
+
 import TextScript from './TextScript'
 import Button from '@/app/_components/Button'
+import { fraunces } from './Fonts'
 
 const Info = () => {
   return (

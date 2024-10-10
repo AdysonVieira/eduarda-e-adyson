@@ -1,6 +1,7 @@
 'use client'
 import React, { ReactNode } from 'react'
-import { corinthia } from '../layout';
+import { corinthia } from './Fonts';
+
 
 interface ITextScriptProps {
   children: ReactNode;
