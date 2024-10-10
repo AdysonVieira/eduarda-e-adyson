@@ -40,25 +40,6 @@ const GuestDataForm = () => {
           {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
         </div>
 
-        <div className='text-start w-full'>
-          <label htmlFor='cpfCnpj' className='block text-start mb-1'>CPF</label>
-          <Controller
-            name='cpfCnpj'
-            control={control}
-            render={({ field }) => (
-              <IMaskInput
-                {...field}
-                id='cpfCnpj'
-                type='text'
-                className='border border-blue-100 w-full rounded-sm p-2 px-4 text-[1rem]'
-                placeholder='000.000.000-00'
-                mask={"000.000.000-00"}
-              />
-            )}
-          />
-          {errors.cpfCnpj && <ErrorMessage>{errors.cpfCnpj.message}</ErrorMessage>}
-        </div>
-
         <div className='text-start'>
           <label htmlFor='mobilePhone' className='block text-start mb-1'>Celular</label>
           <Controller
@@ -77,6 +58,7 @@ const GuestDataForm = () => {
           />
           {errors.mobilePhone && <ErrorMessage>{errors.mobilePhone.message}</ErrorMessage>}
         </div>
+        
         <div className='text-start'>
           <label htmlFor='message' className='block text-start mb-1'>Mensagem</label>
           <textarea
