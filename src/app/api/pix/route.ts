@@ -4,7 +4,7 @@ import CheckoutPixService from "@/services/CheckoutPixService";
 import { QrCode } from "lucide-react";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse<{gift: GiftData, guest: GuestDataInputs}>) {
+export async function POST(res: NextResponse<{gift: GiftData, guest: GuestDataInputs}>) {
   const { gift, guest} = await res.json();
   
   const checkoutService = new CheckoutPixService()

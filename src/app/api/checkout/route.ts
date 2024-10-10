@@ -5,7 +5,7 @@ import { PaymentGuestDataInputs } from "@/app/carrinho/pagamento/_schema/Payment
 import CheckoutCreditCardService from "@/services/CheckoutCreditCardService";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse<{gift: GiftData, guest: GuestDataInputs, paymentGuestData: PaymentGuestDataInputs, paymentCardData: PaymentCardDataInputs}>) {
+export async function POST(res: NextResponse<{gift: GiftData, guest: GuestDataInputs, paymentGuestData: PaymentGuestDataInputs, paymentCardData: PaymentCardDataInputs}>) {
   const { gift, guest, paymentGuestData, paymentCardData } = await res.json();
   const payment = {...paymentGuestData, ...paymentCardData}
   
