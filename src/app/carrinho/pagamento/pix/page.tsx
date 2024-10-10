@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import Image from 'next/image';
 
 import { setPixCheckout } from '@/services/api'
 import { PixQrCodeResponse } from '@/services/CheckoutPixService'
@@ -11,6 +10,7 @@ import PixInfo from './_components/PixInfo'
 import { useCart } from '@/hooks/useCart'
 import GiftCardDetails from '@/app/_components/GiftCardDetails';
 import Error from '@/app/_components/Error';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -19,17 +19,20 @@ const PixPaymentPage = () => {
   const [pixData, setPixData] = React.useState<PixQrCodeResponse>()
   const [loading, setLoading] = React.useState<boolean>(false)
   const [error, setError] = React.useState<string | null>(null)
+
+  const router = useRouter();
+
+  if (!gift) router.push('/presentes');
   
   const handleClick = async () => {
     if (gift && guestData) {
       try {
         setLoading(true)
-        const giftId = {id: gift?.id}
+        const giftId = {id: gift.id}
         const pixData = await setPixCheckout(giftId, guestData)
         setPixData(pixData)
       } catch(err) {
-        setError(null)
-        setLoading(false)
+        setError('Erro ao gerar chave PIX')
       } finally {
         setLoading(false)
       }

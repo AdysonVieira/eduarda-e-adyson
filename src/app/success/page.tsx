@@ -21,7 +21,7 @@ const SuccessPage = () => {
           height={200}
         />
         <div>
-          <p className='text-[1.8rem] uppercase pb-4'>Pagamento confirmado</p>
+          <p className='text-[1.8rem] uppercase pb-4'>Pedido confirmado</p>
           <TextScript>Obrigado</TextScript>
         </div>
         <p>Adoramos o seu presente, agradecemos de coração!</p>

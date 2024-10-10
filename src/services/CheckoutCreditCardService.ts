@@ -24,15 +24,35 @@ class CheckoutCreditCardService {
 
     const paymentService = new PaymentService();
     
-    const { transactionId, gatewayStatus } = await paymentService.process(orderCreated, payment);
+    const paymentResponse = await paymentService.process(orderCreated, payment);
 
+    if(paymentResponse?.status === 'CANCELED') {
+      
+      orderCreated = await db.giftReceived.update({
+        where: {
+          id: orderCreated.id
+        },
+        data: {
+          transactionId: paymentResponse?.transactionId,
+          status: GiftReceivedStatus.CANCELED
+        }
+      });
+
+      return {
+        id: orderCreated.id,
+        transactionId: orderCreated.transactionId,
+        status: orderCreated.status,
+        gatewayStatus: paymentResponse.gatewayStatus
+      }
+    }
+    
     orderCreated = await db.giftReceived.update({
       where: {
         id: orderCreated.id
       },
       data: {
-        transactionId,
-        status: GiftReceivedStatus.PAID
+        transactionId: paymentResponse?.transactionId,
+        status: GiftReceivedStatus.PENDING
       }
     });
         
@@ -40,7 +60,7 @@ class CheckoutCreditCardService {
       id: orderCreated.id,
       transactionId: orderCreated.transactionId,
       status: orderCreated.status,
-      gatewayStatus: gatewayStatus
+      gatewayStatus: paymentResponse.gatewayStatus
     }
   }
 

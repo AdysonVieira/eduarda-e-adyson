@@ -6,25 +6,19 @@ class PaymentCreditCardService {
   async process(
     giftReceived: GiftReceived,
     payment: PaymentData,
-  ): Promise<
-  { transactionId: string, status: GiftReceivedStatus, gatewayStatus: string} >{
+  ): Promise<{
+    transactionId: string;
+    status: GiftReceivedStatus;
+    gatewayStatus: string;
+  }> {
+      const customerId = await this._createCustomer(payment);
+      const transaction = await this._createCreditCardTransaction(customerId, giftReceived, payment)
       
-    try {
-        const customerId = await this._createCustomer(payment)
-        const transaction = await this._createCreditCardTransaction(customerId, giftReceived, payment)
-        return {
-          transactionId: transaction.transactionId,
-          status: GiftReceivedStatus.PAID,
-          gatewayStatus: transaction.gatewayStatus,
-        }
-      } catch(error) {
-        console.error("error on payment process: ", JSON.stringify(error, null, 2))
-        return {
-          transactionId: '',
-          status: GiftReceivedStatus.CANCELED,
-          gatewayStatus: '401'
-        }
-      }   
+      return {
+        transactionId: transaction.transactionId,
+        status: GiftReceivedStatus.PENDING,
+        gatewayStatus: transaction.gatewayStatus,
+      }
     }
 
   private async _createCustomer(payment: PaymentData | GuestData){
@@ -50,9 +44,9 @@ class PaymentCreditCardService {
     giftReceived: GiftReceived,
     payment: PaymentData
   ): Promise<{
-      transactionId: string
-      gatewayStatus: string
-    }> {
+    transactionId: string;
+    gatewayStatus: string
+  }> {
 
     const paymentParams = {
       billingType: 'CREDIT_CARD',
@@ -81,35 +75,20 @@ class PaymentCreditCardService {
       }
     }
     
-
-    const res = await apiAsaas.post('/payments', paymentParams)
-
-    return {
-      transactionId: res.data?.id,
-      gatewayStatus: res.data?.status
+    try {
+      const res = await apiAsaas.post('/payments', paymentParams)
+      return {
+        transactionId: res.data.id,
+        gatewayStatus: res.data.status
+      }
+    } catch(err) {
+      console.error('Erro ao criar cobrança no cartão de crédito');
+      return {
+        transactionId: '',
+        gatewayStatus: 'ERROR'
+      }
     }
   }
-
-  private async _createPixTransaction(gift: GiftReceived) {
-    const key = await apiAsaas.post('/pix/addressKeys', {type: "EVP"})
-
-    const qrCodeParams = {
-      addressKey: key.data.key,
-      description: 'Presente de casamento Eduarda e Adyson',
-      value: gift.total,
-      format: 'ALL',
-      expirationSeconds: 7200,
-      allowsMultiplePayments: false
-    }
-    const qrCode = await apiAsaas.post('/qrCodes/static', qrCodeParams )
-    
-    return {
-      id: qrCode.data.id,
-      encodedImage: qrCode.data.encodedImage,
-      payload: qrCode.data.payload,
-      expirationDate: qrCode.data.expirationDate,
-    }
-  }
-}
+};
 
 export default PaymentCreditCardService
