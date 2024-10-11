@@ -7,11 +7,11 @@ import { GuestDataInputs } from '@/app/carrinho/_schema/GuestDataSchema'
 import { CreditCardResponse } from './CheckoutCreditCardService'
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL
+  baseURL: process.env.BASE_URL
 });
 
 export const apiAsaas = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_ASAAS_API_URL,
+  baseURL: process.env.ASAAS_API_URL,
   headers: {
     access_token: process.env.ASAAS_API_ACCESS_TOKEN,
   }
