@@ -1,6 +1,6 @@
 import { GiftReceived, GiftReceivedStatus } from "@prisma/client";
 import { apiAsaas } from "./api";
-import { GuestData, PaymentData } from "@/app/@types/checkout";
+import { GuestData, PaymentData } from "@/app/_types/checkout";
 
 class PaymentCreditCardService {
   async process(
@@ -11,17 +11,17 @@ class PaymentCreditCardService {
     status: GiftReceivedStatus;
     gatewayStatus: string;
   }> {
-      const customerId = await this._createCustomer(payment);
-      const transaction = await this._createCreditCardTransaction(customerId, giftReceived, payment)
-      
-      return {
-        transactionId: transaction.transactionId,
-        status: GiftReceivedStatus.PENDING,
-        gatewayStatus: transaction.gatewayStatus,
-      }
-    }
+    const customerId = await this._createCustomer(payment);
+    const transaction = await this._createCreditCardTransaction(customerId, giftReceived, payment)
 
-  private async _createCustomer(payment: PaymentData | GuestData){
+    return {
+      transactionId: transaction.transactionId,
+      status: GiftReceivedStatus.PENDING,
+      gatewayStatus: transaction.gatewayStatus,
+    }
+  }
+
+  private async _createCustomer(payment: PaymentData | GuestData) {
     const customerResponse = await apiAsaas.get(`/customers?cpfCnpj=${payment.cpfCnpj}`)
     if (customerResponse.data.data?.length > 0) {
       return customerResponse.data.data[0]?.id
@@ -56,7 +56,7 @@ class PaymentCreditCardService {
       description: giftReceived.giftId,
       installmentCount: payment.installmentCount,
       totalValue: (+giftReceived.total + (+giftReceived.total * 0.03)),
-      callback: {autoRedirect: true, successUrl: 'https://eduardaeadyson.vercel.app/success'},
+      callback: { autoRedirect: true, successUrl: 'https://eduardaeadyson.vercel.app/success' },
       creditCard: {
         holderName: payment.creditCardHolder,
         number: payment.creditCardNumber,
@@ -74,14 +74,14 @@ class PaymentCreditCardService {
         addressComplement: payment.addressComplement,
       }
     }
-    
+
     try {
       const res = await apiAsaas.post('/payments', paymentParams)
       return {
         transactionId: res.data.id,
         gatewayStatus: res.data.status
       }
-    } catch(err) {
+    } catch (err) {
       console.error('Erro ao criar cobrança no cartão de crédito');
       return {
         transactionId: '',

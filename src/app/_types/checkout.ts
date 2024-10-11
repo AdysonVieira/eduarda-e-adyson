@@ -3,13 +3,6 @@ export type GiftData = {
   
 }
 
-export type GuestData = {
-  name: string,
-  cpfCnpj: string,
-  mobilePhone?: string,
-  message?: string
-}
-
 export type PaymentData = {
   creditCardNumber: string
   creditCardHolder: string
@@ -25,4 +18,3 @@ export type PaymentData = {
   mobilePhone: string
 }
 
-export type PaymentType = 'credit-card' | 'pix'

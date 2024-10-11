@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GiftData, GuestData, PaymentType } from '@/app/@types/checkout'
+import { GiftData, GuestData, PaymentType } from '@/app/_types/checkout'
 import { PaymentGuestDataInputs } from '@/app/carrinho/pagamento/_schema/PaymentGuestDataSchema'
 import { PaymentCardDataInputs } from '@/app/carrinho/pagamento/_schema/PaymentCardDataSchema'
 import { PixQrCodeResponse } from './CheckoutPixService'
@@ -17,7 +17,7 @@ export const apiAsaas = axios.create({
   }
 });
 
-export const setCreditCardCheckout = async (gift: GiftData, guest: GuestDataInputs, paymentGuestData: PaymentGuestDataInputs, paymentCardData: PaymentCardDataInputs, ): Promise<CreditCardResponse> => {
+export const setCreditCardCheckout = async (gift: GiftData, guest: GuestDataInputs, paymentGuestData: PaymentGuestDataInputs, paymentCardData: PaymentCardDataInputs,): Promise<CreditCardResponse> => {
 
   const res = await api.post("/api/checkout", {
     gift,
@@ -28,8 +28,8 @@ export const setCreditCardCheckout = async (gift: GiftData, guest: GuestDataInpu
   return res.data
 };
 
-export const setPixCheckout = async (gift: GiftData, guest: GuestDataInputs ):Promise<PixQrCodeResponse> => {
-  const res = await api.post("/api/pix", {gift, guest})
+export const setPixCheckout = async (gift: GiftData, guest: GuestDataInputs): Promise<PixQrCodeResponse> => {
+  const res = await api.post("/api/pix", { gift, guest })
   return res.data
 };
 

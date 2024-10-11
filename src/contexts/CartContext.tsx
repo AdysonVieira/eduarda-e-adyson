@@ -1,7 +1,7 @@
 'use client'
 
-import { PaymentData } from "@/app/@types/checkout";
-import { Gift } from "@/app/@types/gift";
+import { PaymentData } from "@/app/_types/checkout";
+import { Gift } from "@/app/_types/gift";
 import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
 import { PaymentCardDataInputs } from "@/app/carrinho/pagamento/_schema/PaymentCardDataSchema";
 import { PaymentGuestDataInputs } from "@/app/carrinho/pagamento/_schema/PaymentGuestDataSchema";

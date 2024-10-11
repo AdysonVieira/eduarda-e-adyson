@@ -1,5 +1,5 @@
 import { $Enums, Gift, GiftReceived, GiftReceivedStatus } from "@prisma/client";
-import { GiftData, GuestData, PaymentData } from '@/app/@types/checkout'
+import { GiftData, GuestData, PaymentData } from '@/app/_types/checkout'
 import { db } from "../lib/prisma";
 import PaymentService from "./PaymentCreditCardService";
 import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
@@ -12,8 +12,8 @@ export interface CreditCardResponse {
 }
 
 class CheckoutCreditCardService {
-  async process(gift: GiftData, guest: GuestDataInputs, payment: PaymentData ): Promise<CreditCardResponse> {
-  
+  async process(gift: GiftData, guest: GuestDataInputs, payment: PaymentData): Promise<CreditCardResponse> {
+
     const giftInCart = await db.gift.findUnique({
       where: {
         id: gift.id
@@ -23,11 +23,11 @@ class CheckoutCreditCardService {
     let orderCreated = await this._createOrder(giftInCart!, guest);
 
     const paymentService = new PaymentService();
-    
+
     const paymentResponse = await paymentService.process(orderCreated, payment);
 
-    if(paymentResponse?.status === 'CANCELED') {
-      
+    if (paymentResponse?.status === 'CANCELED') {
+
       orderCreated = await db.giftReceived.update({
         where: {
           id: orderCreated.id
@@ -45,7 +45,7 @@ class CheckoutCreditCardService {
         gatewayStatus: paymentResponse.gatewayStatus
       }
     }
-    
+
     orderCreated = await db.giftReceived.update({
       where: {
         id: orderCreated.id
@@ -55,7 +55,7 @@ class CheckoutCreditCardService {
         status: GiftReceivedStatus.PENDING
       }
     });
-        
+
     return {
       id: orderCreated.id,
       transactionId: orderCreated.transactionId,
@@ -64,7 +64,7 @@ class CheckoutCreditCardService {
     }
   }
 
-  private async _createOrder( gift: Gift, guest: GuestDataInputs): Promise<GiftReceived> {
+  private async _createOrder(gift: Gift, guest: GuestDataInputs): Promise<GiftReceived> {
     const orderCreated = await db.giftReceived.create({
       data: {
         guestName: guest.name,
@@ -82,7 +82,7 @@ class CheckoutCreditCardService {
     })
     return orderCreated
   }
-  
+
 }
 
 export default CheckoutCreditCardService
