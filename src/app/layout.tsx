@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Merriweather } from "next/font/google";
+import { Merriweather } from "next/font/google";
 import "./globals.css";
+import CartProvider from "@/contexts/CartContext";
+import Header from "./_components/Header";
 
 const merri = Merriweather({
   weight: ["300","400","700"],
@@ -12,14 +14,15 @@ export const metadata: Metadata = {
   description: "Nosso casamento, Eduarda e Adyson",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode;}>) {
   return (
-    <html lang="en">
-      <body className={merri.className}>{children}</body>
+    <html lang="pt-BR">
+      <body className={merri.className}>
+        <CartProvider>
+          <Header />
+          {children}
+        </CartProvider>
+      </body>
     </html>
   );
 }
