@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GiftData, GuestData, PaymentType } from '@/app/_types/checkout'
+import { GiftData, GuestData } from '@/app/_types/checkout'
 import { PaymentGuestDataInputs } from '@/app/carrinho/pagamento/_schema/PaymentGuestDataSchema'
 import { PaymentCardDataInputs } from '@/app/carrinho/pagamento/_schema/PaymentCardDataSchema'
 import { PixQrCodeResponse } from './CheckoutPixService'

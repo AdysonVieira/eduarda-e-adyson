@@ -1,5 +1,5 @@
 import { $Enums, Gift, GiftReceived, GiftReceivedStatus } from "@prisma/client";
-import { GiftData, GuestData, PaymentData } from '@/app/_types/checkout'
+import { GiftData, PaymentData } from '@/app/_types/checkout'
 import { db } from "../lib/prisma";
 import PaymentService from "./PaymentCreditCardService";
 import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
