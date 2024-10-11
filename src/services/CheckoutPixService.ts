@@ -17,7 +17,6 @@ class CheckoutPixService {
         id: gift.id
       }
     })
-
     let orderCreated = await this._createOrder(giftInCart!, guest)
 
     const paymentService = new PaymentPixService()
