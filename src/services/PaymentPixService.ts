@@ -7,8 +7,7 @@ class PaymentPixService {
     giftReceived: GiftReceived,
   ): Promise<PixQrCodeResponse>{
     
-    const key = await this._createAddressKey()
-    const qrCode = await this._createQrCode(giftReceived, key)
+    const qrCode = await this._createQrCode(giftReceived)
     return {
       id: qrCode.id,
       encodedImage: qrCode.encodedImage,
@@ -16,9 +15,9 @@ class PaymentPixService {
     }
   }
 
-  private async _createQrCode(gift: GiftReceived, key: string):Promise<PixQrCodeResponse>{
+  private async _createQrCode(gift: GiftReceived):Promise<PixQrCodeResponse>{
       const qrCodeParams = {
-        addressKey: key,
+        addressKey: process.env.ASAAS_PIX_ADDRESS_KEY,
         description: 'Presente Eduarda e Adyson',
         value: gift.total,
         format: 'ALL',
