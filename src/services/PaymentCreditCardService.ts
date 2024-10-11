@@ -1,6 +1,6 @@
 import { GiftReceived, GiftReceivedStatus } from "@prisma/client";
 import { apiAsaas } from "./api";
-import { GuestData, PaymentData } from "@/app/_types/checkout";
+import { PaymentData } from "@/app/_types/checkout";
 
 class PaymentCreditCardService {
   async process(
@@ -21,7 +21,7 @@ class PaymentCreditCardService {
     }
   }
 
-  private async _createCustomer(payment: PaymentData | GuestData) {
+  private async _createCustomer(payment: PaymentData) {
     const customerResponse = await apiAsaas.get(`/customers?cpfCnpj=${payment.cpfCnpj}`)
     if (customerResponse.data.data?.length > 0) {
       return customerResponse.data.data[0]?.id

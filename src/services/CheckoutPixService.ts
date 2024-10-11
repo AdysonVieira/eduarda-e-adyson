@@ -1,7 +1,8 @@
 import { Gift, GiftReceived, GiftReceivedStatus } from "@prisma/client";
-import { GiftData, GuestData, PaymentData } from '@/app/_types/checkout'
+import { GiftData } from '@/app/_types/checkout'
 import { db } from "../lib/prisma";
 import PaymentPixService from "./PaymentPixService";
+import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
 
 export interface PixQrCodeResponse {
   id: string;
@@ -10,7 +11,7 @@ export interface PixQrCodeResponse {
 }
 
 class CheckoutPixService {
-  async process(gift: GiftData, guest: GuestData): Promise<PixQrCodeResponse> {
+  async process(gift: GiftData, guest: GuestDataInputs): Promise<PixQrCodeResponse> {
     const giftInCart = await db.gift.findUnique({
       where: {
         id: gift.id
@@ -29,7 +30,7 @@ class CheckoutPixService {
     }
   }
 
-  private async _createOrder(gift: Gift, guest: GuestData): Promise<GiftReceived> {
+  private async _createOrder(gift: Gift, guest: GuestDataInputs): Promise<GiftReceived> {
     const orderCreated = await db.giftReceived.create({
       data: {
         guestName: guest.name,
