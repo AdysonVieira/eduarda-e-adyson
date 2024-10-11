@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import Button from '@/app/_components/Button'
 import { X } from 'lucide-react'
 import React, { ReactEventHandler, SetStateAction } from 'react'
 
@@ -11,7 +11,7 @@ const Error = ({onClick}: ErrorProps) => {
     <>
       <X size={40} className='stroke-blue-300' />
       <p>Algo deu errado, tente novamente</p>
-      <Button variant="default" className='text-blue-950 bg-blue-200' onClick={() => onClick(false)}>Tentar novamente</Button>
+      <Button onClick={() => onClick(false)}>Tentar novamente</Button>
     </>
   )
 }
