@@ -8,9 +8,7 @@ class PaymentPixService {
   ): Promise<PixQrCodeResponse>{
     
     const key = await this._createAddressKey()
-    console.log(key)
     const qrCode = await this._createQrCode(giftReceived, key)
-    console.log(qrCode)
     return {
       id: qrCode.id,
       encodedImage: qrCode.encodedImage,
