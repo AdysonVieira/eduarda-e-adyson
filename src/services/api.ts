@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { GuestDataInputs } from '@/app/carrinho/_schema/GuestDataSchema'
-import { Gift } from '@prisma/client'
+
 import { CheckoutResponse } from './CheckoutService'
+import { Gift } from '@/app/_types/gift';
 
 export const api = axios.create({
   baseURL: process.env.BASE_URL
