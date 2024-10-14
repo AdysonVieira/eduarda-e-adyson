@@ -22,19 +22,9 @@ class CheckoutService {
     const paymentService = new PaymentService();
     const paymentResponse = await paymentService.process(orderCreated, guest);
 
-    
-    orderCreated = await db.giftReceived.update({
-      where: {
-        id: orderCreated.id
-      },
-      data: {
-        status: GiftReceivedStatus.PENDING
-      }
-    });
-
-    // return {
-    //   invoiceUrl: paymentResponse.invoiceUrl
-    // }
+    return {
+      invoiceUrl: paymentResponse.invoiceUrl
+    }
   }
 
 
@@ -56,7 +46,6 @@ class CheckoutService {
     })
     return orderCreated
   }
-
 }
 
 export default CheckoutService;
