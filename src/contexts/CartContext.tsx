@@ -1,7 +1,8 @@
 'use client'
 
+import { Gift } from "@/app/_types/gift";
 import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
-import { Gift } from "@prisma/client";
+
 import React, { ReactNode, SetStateAction } from "react";
 
 type GuestConfirmation = {
