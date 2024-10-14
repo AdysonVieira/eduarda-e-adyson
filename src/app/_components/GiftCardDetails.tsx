@@ -20,7 +20,7 @@ const GiftCardDetails = () => {
         />
         <p>{gift.name}</p>
       </div>
-      <p>{formatCurrency(gift.price)}</p>
+      <p>{formatCurrency(Number(gift.price))}</p>
     </div>
   )
 }
