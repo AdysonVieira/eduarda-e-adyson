@@ -46,6 +46,7 @@ class PaymentService {
       billingType: 'UNDEFINED',
       customer: customerId,
       value: giftReceived.total,
+      description: 'Presente de casamento Eduarda e Adyson',
       dueDate: new Date().toISOString(),
     }
 
