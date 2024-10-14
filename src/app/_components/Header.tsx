@@ -29,6 +29,7 @@ const Header = () => {
               <li><SheetClose asChild><Link href={'/'}><span>Home</span></Link></SheetClose></li>
               <li><SheetClose asChild><Link href={'/confirmacao'}><span>Confirmar Presença</span></Link></SheetClose></li>
               <li><SheetClose asChild><Link href={'/presentes'}><span>Lista de presentes</span></Link></SheetClose></li>
+              <li><SheetClose asChild><Link href={'/programacao'}><span>Programação</span></Link></SheetClose></li>
             </ul>
           </SheetContent>
         </Sheet>
