@@ -15,7 +15,7 @@ export const apiAsaas = axios.create({
 });
 
 
-export const setCheckout = async (gift: Gift, guest: GuestDataInputs)=> {
+export const setCheckout = async (gift: Gift, guest: GuestDataInputs): Promise<CheckoutResponse> => {
   const res = await api.post("/api/checkout", {
     gift,
     guest,
