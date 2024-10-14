@@ -1,11 +1,9 @@
 'use client'
 
-import { PaymentData } from "@/app/_types/checkout";
-import { Gift } from "@/app/_types/gift";
 import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
 import { PaymentCardDataInputs } from "@/app/carrinho/pagamento/_schema/PaymentCardDataSchema";
 import { PaymentGuestDataInputs } from "@/app/carrinho/pagamento/_schema/PaymentGuestDataSchema";
-import { CreditCardResponse } from "@/services/CheckoutCreditCardService";
+import { Gift } from "@prisma/client";
 import React, { ReactNode, SetStateAction } from "react";
 
 type GuestConfirmation = {
@@ -24,8 +22,6 @@ interface CartContextProps {
   setPaymentGuestData: React.Dispatch<SetStateAction<PaymentGuestDataInputs | undefined>>;
   paymentCardData: PaymentCardDataInputs | undefined
   setPaymentCardData: React.Dispatch<SetStateAction<PaymentCardDataInputs | undefined>>;
-  order: CreditCardResponse | undefined
-  setOrder: React.Dispatch<SetStateAction<CreditCardResponse | undefined>>;
   resetValues: () => void;
 }
 
@@ -40,7 +36,6 @@ const CartProvider = ({ children }: CartProviderProps) => {
   const [gift, setGift] = React.useState<Gift>()
   const [paymentGuestData, setPaymentGuestData] = React.useState<PaymentGuestDataInputs>()
   const [paymentCardData, setPaymentCardData] = React.useState<PaymentCardDataInputs>()
-  const [order, setOrder] = React.useState<CreditCardResponse>()
 
   const resetValues = React.useCallback(() => {
     setGift(undefined)
@@ -60,8 +55,6 @@ const CartProvider = ({ children }: CartProviderProps) => {
       setPaymentGuestData,
       paymentCardData,
       setPaymentCardData,
-      order,
-      setOrder,
       resetValues,
     }}>
       {children}
