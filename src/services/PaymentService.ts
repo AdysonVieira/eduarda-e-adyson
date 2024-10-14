@@ -16,7 +16,7 @@ class PaymentService {
 
   private async _createCustomer(guest: GuestDataInputs): Promise<string> {
     
-    const customerResponse = await apiAsaas.get(`/v3/customers?cpfCnpj=${guest.cpfCnpj}`)
+    const customerResponse = await apiAsaas.get(`/customers?cpfCnpj=${guest.cpfCnpj}`)
     
     if (customerResponse.data.data?.length > 0) {
       return customerResponse.data.data[0]?.id
@@ -29,7 +29,7 @@ class PaymentService {
       notificationDisabled: true
     }
 
-    const res = await apiAsaas.post('/v3/customers', customerParams)
+    const res = await apiAsaas.post('/customers', customerParams)
 
     return res.data.id
   }
@@ -50,7 +50,7 @@ class PaymentService {
     }
 
     
-    const res = await apiAsaas.post('/v3/payments', paymentParams)
+    const res = await apiAsaas.post('/payments', paymentParams)
     
     return {
       invoiceUrl: res.data.invoiceUrl,
