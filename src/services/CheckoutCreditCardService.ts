@@ -1,7 +1,7 @@
 import { $Enums, Gift, GiftReceived, GiftReceivedStatus } from "@prisma/client";
 import { GiftData, PaymentData } from '@/app/_types/checkout'
 import { db } from "../lib/prisma";
-import PaymentService from "./PaymentCreditCardService";
+import PaymentCreditCardService from "./PaymentCreditCardService";
 import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
 
 export interface CreditCardResponse {
@@ -22,8 +22,7 @@ class CheckoutCreditCardService {
 
     let orderCreated = await this._createOrder(giftInCart!, guest);
 
-    const paymentService = new PaymentService();
-
+    const paymentService = new PaymentCreditCardService();
     const paymentResponse = await paymentService.process(orderCreated, payment);
 
     if (paymentResponse?.status === 'CANCELED') {

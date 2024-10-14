@@ -1,4 +1,4 @@
-import { GiftReceived, GiftReceivedStatus } from "@prisma/client";
+import { GiftReceived } from "@prisma/client";
 import { apiAsaas } from "./api";
 import { PixQrCodeResponse } from "./CheckoutPixService";
 

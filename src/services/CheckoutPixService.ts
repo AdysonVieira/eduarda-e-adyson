@@ -1,4 +1,4 @@
-import { Gift, GiftReceived, GiftReceivedStatus } from "@prisma/client";
+import { Gift, GiftReceived } from "@prisma/client";
 import { GiftData } from '@/app/_types/checkout'
 import { db } from "../lib/prisma";
 import PaymentPixService from "./PaymentPixService";
