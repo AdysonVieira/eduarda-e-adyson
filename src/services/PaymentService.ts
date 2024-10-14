@@ -9,13 +9,12 @@ class PaymentService {
     guest: GuestDataInputs,
   ){
     const customerId = await this._createCustomer(guest);
-    console.log(customerId, giftReceived)
-    // const { invoiceUrl } = await this._createTransaction(customerId, giftReceived, guest)
+    const { invoiceUrl } = await this._createTransaction(customerId, giftReceived, guest)
 
-    // return {invoiceUrl}
+    return {invoiceUrl}
   }
 
-  private async _createCustomer(guest: GuestDataInputs) {
+  private async _createCustomer(guest: GuestDataInputs): Promise<string> {
     
     const customerResponse = await apiAsaas.get(`/customers?cpfCnpj=${guest.cpfCnpj}`)
     
