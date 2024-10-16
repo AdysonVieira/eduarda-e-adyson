@@ -111,7 +111,7 @@ const GuestDataForm = () => {
           <li><p>Em caso de problemas durante o direcionamento para o pagamento, use o QR Code impresso no convite para concluir o pagamento.</p></li>
         </ul>
 
-        <Button>ir para pagamento</Button>
+        <Button disabled={loading}>ir para pagamento</Button>
       </form>
     </div>
   )
