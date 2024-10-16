@@ -10,6 +10,7 @@ import { useCart } from '@/hooks/useCart'
 import { useRouter } from 'next/navigation'
 import { setCheckout } from '@/services/api'
 import Loading from '@/app/_components/Loading'
+import Error from '@/app/_components/Error'
 
 const GuestDataForm = () => {
   const { setGuestData, gift } = useCart()
@@ -31,12 +32,11 @@ const GuestDataForm = () => {
     } catch(err) {
       console.error(err)
       setError('Erro ao gerar pagamento')
-    } finally {
-      setLoading(false)
-    }
+    } 
   }
 
   if(loading) return <Loading message='Gerando cobrança, aguarde.' />
+  if(error) return <Error message={error} />
 
   return (
     <div className="w-full text-center flex flex-col items-center gap-5">
