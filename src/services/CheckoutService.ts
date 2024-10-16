@@ -1,5 +1,5 @@
-import { $Enums, Gift, GiftReceived, GiftReceivedStatus } from "@prisma/client";
-import { GiftData, PaymentData } from '@/app/_types/checkout'
+import { Gift, GiftReceived } from "@prisma/client";
+import { GiftData } from '@/app/_types/checkout'
 import { db } from "../lib/prisma";
 import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
 import PaymentService from "./PaymentService";
@@ -21,6 +21,14 @@ class CheckoutService {
 
     const paymentService = new PaymentService();
     const paymentResponse = await paymentService.process(orderCreated, guest);
+
+    orderCreated = await db.giftReceived.update({
+      where: {
+        id: orderCreated.id,
+      }, data: {
+        transactionId: paymentResponse.transactionId
+      }
+    })
 
     return {
       invoiceUrl: paymentResponse.invoiceUrl

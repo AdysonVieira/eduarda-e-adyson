@@ -1,17 +1,19 @@
-import { GiftReceived, GiftReceivedStatus } from "@prisma/client";
+import { GiftReceived } from "@prisma/client";
 import { apiAsaas } from "./api";
-import { PaymentData } from "@/app/_types/checkout";
 import { GuestDataInputs } from "@/app/carrinho/_schema/GuestDataSchema";
 
 class PaymentService {
   async process(
     giftReceived: GiftReceived,
     guest: GuestDataInputs,
-  ){
+  ): Promise<{
+    invoiceUrl: string;
+    transactionId: string;
+  }>{
     const customerId = await this._createCustomer(guest);
-    const { invoiceUrl } = await this._createTransaction(customerId, giftReceived, guest)
+    const { invoiceUrl, transactionId } = await this._createTransaction(customerId, giftReceived, guest)
 
-    return {invoiceUrl}
+    return {invoiceUrl, transactionId}
   }
 
   private async _createCustomer(guest: GuestDataInputs): Promise<string> {
@@ -40,6 +42,7 @@ class PaymentService {
     guest: GuestDataInputs
   ): Promise<{
     invoiceUrl: string;
+    transactionId: string;
   }> {
 
     const paymentParams = {
@@ -55,6 +58,7 @@ class PaymentService {
     
     return {
       invoiceUrl: res.data.invoiceUrl,
+      transactionId: res.data.id,
     }
   }
 };
