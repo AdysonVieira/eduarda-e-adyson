@@ -3,6 +3,7 @@ import { Merriweather } from "next/font/google";
 import "./globals.css";
 import CartProvider from "@/contexts/CartContext";
 import Header from "./_components/Header";
+import Footer from "./_components/Footer";
 
 const merri = Merriweather({
   weight: ["300","400","700"],
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <CartProvider>
           <Header />
           {children}
+          <Footer />
         </CartProvider>
       </body>
     </html>

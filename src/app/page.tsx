@@ -1,8 +1,8 @@
 import Confirmation from "./_components/Confirmation";
-import Footer from "./_components/Footer";
 import Gift from "./_components/Gift";
 import Hero from "./_components/Hero";
 import Info from "./_components/Info";
+import MessageSection from "./_components/MessageSection";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <Info />
       <Confirmation />
       <Gift />
-      <Footer />
+      <MessageSection />
     </main>
   );
 }
